@@ -13,4 +13,61 @@
 
 <br />
 
+
+
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/redmond/jquery-ui.css">
+
+  <script type="text/javascript">
+  $( document ).ready(function() {
+
+    $("#poll").click(function() {
+        $("#myDialog").dialog({height: 'auto', buttons: { "OK": function() { var answer; answer=$("#datepicker").val() ;$.ajax({type: 'GET', url: '/adminusers/sendemails',dataType: 'script',data: { subject: ("Interview scheduled for "+ answer) }  }); $(this).dialog("close"); } } });
+    });
+ });
+
+  </script>
+
+</head>
+<body>
+</br>
+</br>
+</br>
+</br>
+</br>
+  <button id="poll">Click to Schedule Interview</button>
+  <div id="myDialog" class="flora" title="Schedule Interview options" style="display: none;">
+    <br>
+    <p>Interview Scheduling Options for</p>
+
+    <br>
+    <label for="yes">Send Email Invitation :)</label><input type="radio" id="yes" value="yes25" name="question">
+    <br/>
+    <br>
+    <label for="no">Send Rejection Mail   :( </label><input type="radio" id="no" value="no" name="question">
+    <br/>
+      <!-- add styles -->
+
+
+      <!--Interview Date(MM/DD/YY): <input type="text" id="first_name" />
+      Interview Time: <input type="text" id="time_name" /> -->
+
+      <!-- Adding calendar functionality-->
+      Interview Date: <input id="datepicker" type="text" />
+
+      <script>
+         $(function(){
+           $.datepicker.setDefaults(
+             $.extend($.datepicker.regional[''])
+           );
+           $('#datepicker').datepicker();
+         });
+       </script>
+
+  </div>
+
+  <div style='color: green;' id='result'>
+  </div>
+
+
 <%= link_to 'New Article', new_article_path, :id => 'create_article' %>
